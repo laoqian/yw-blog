@@ -24,7 +24,8 @@ html
                // li(class="active"): a(href="#")= item
       .yw-menu
         ul.list-group
-          for nav in navlinks
+          //-var navs={a:{label:"1" ,key:'123'},b:{label:"1" ,key:'123'}}
+          each nav in navlinks
             li.list-group-item
               a(href=nav.label)
                 span(class='glyphicon '+nav.icon) &nbsp

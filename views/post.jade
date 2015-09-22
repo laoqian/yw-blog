@@ -5,19 +5,24 @@ block content
     .container-fluid
       .row
         .col-sm-10
-          form
-            .form-group
-              label(for="title"): h2 增加项目
-              .input-group
-                span.input-group-addon 名称：&nbsp&nbsp&nbsp&nbsp
-                input(type="text").form-control
-            .form-group
-              .input-group
-                span.input-group-btn
-                  button.btn.btn-default 上传图片
-            .form-group
-              p 详细介绍：
-              textarea.content-detail
-            .form-group
-              span.input-group-btn
-                button(type="submit" ).btn.btn-success 保存
+          label: h2 增加项目
+          form(role='form', method='post')
+            .form-group.form-inline
+              label(for="title") 项目名称：
+              input(autofocus type="text" id='title').form-control
+            .form-group.form-inline
+              label 详细介绍：
+              textarea(name='content').content-detail
+            .form-group.form-inline
+              button.btn.btn-default 上传图片
+              label 上传一张不超过4M的图片。
+
+            button(type="submit" ).btn.btn-primary.btn-lg 保存
+
+          //
+            p 客户名称
+              input(type='text',name='name')
+            p 客户电话
+              input(type='text',name='tel')
+            p
+              input(type='submit' value='提交')

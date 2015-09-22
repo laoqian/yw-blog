@@ -1,61 +1,18 @@
-var express = require('express');
-var router = express.Router();
+var middleware=require('../controller/lib/middlewares');
 
-/* GET home page. */
-router.get('/index', function(req, res, next) {
 
-  var locals={
-    title:'木鱼网络',
-    section:'index',
-    navlinks:{
-      index:{
-        label:'index',
-        key:'内容管理',
-        icon:'glyphicon-home'
-      },
-      post:{
-        label:'post',
-        key:'内容增加',
-        icon:'glyphicon-time'
+// Setup Route Bindings
+exports = module.exports = function init (app) {
 
-      },
-      comment:{
-        label:'comment',
-        key:'回复管理',
-        icon:'glyphicon-user'
-      }
-    }
-  }
+  var importer=app.imporper;
+  // Import Route Controllers
+  var routes = {
+    views: importer('./views')
+  };
 
-  res.render('index', locals);
-});
+  // Views
+  app.get('/', routes.views.index);
+  app.get('/post', routes.views.post);
+};
 
-router.get("/post", function(req, res, next) {
 
-  var locals={
-    title:'木鱼网络',
-    section:'index',
-    navlinks:{
-      index:{
-        label:'index',
-        key:'内容管理',
-        icon:'glyphicon-home'
-      },
-      post:{
-        label:'post',
-        key:'内容增加',
-        icon:'glyphicon-time'
-
-      },
-      comment:{
-        label:'comment',
-        key:'回复管理',
-        icon:'glyphicon-user'
-      }
-    }
-  }
-
-  res.render('post', locals);
-});
-
-module.exports = router;
