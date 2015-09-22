@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  .yw-content
+    .container-fluid
+      .row
+        .col-sm-10
+          form
+            .form-group
+              label(for="title"): h2 增加项目
+              .input-group
+                span.input-group-addon 名称：&nbsp&nbsp&nbsp&nbsp
+                input(type="text").form-control
+            .form-group
+              .input-group
+                span.input-group-btn
+                  button.btn.btn-default 上传图片
+            .form-group
+              p 详细介绍：
+              textarea.content-detail
+            .form-group
+              span.input-group-btn
+                button(type="submit" ).btn.btn-success 保存
