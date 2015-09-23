@@ -1,18 +1,24 @@
-var middleware=require('../controller/lib/middlewares');
+
 
 
 // Setup Route Bindings
-exports = module.exports = function init (app) {
+exports.init = function init (app) {
 
-  var importer=app.imporper;
+  var importer=app.get('importer')(__dirname);
+
   // Import Route Controllers
   var routes = {
     views: importer('./views')
   };
 
+
   // Views
   app.get('/', routes.views.index);
   app.get('/post', routes.views.post);
+
+  console.log('设置路由成功');
 };
+
+
 
 

@@ -9,9 +9,10 @@ var routes = require('./routes/index');
 
 
 var app = express();
+var router = express.Router();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'template'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
@@ -22,6 +23,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+//中间件初始化
+var middleware=require('./middlewares/middlewares');
+app.use(middleware.initLocals);
+
+
+//应用初始化
+app.set('importer',require('./controller/lib/importer'));
+
+//初始化本地变量
+app.locals = {};
+
+//路由初始化
+routes.init(app);
 
 
 // catch 404 and forward to error handler
@@ -56,15 +72,7 @@ app.use(function(err, req, res, next) {
 });
 
 
-//应用初始化
-app.set('importer',require('./controller/lib/importer'));
 
-//中间件初始化
-router.user(middleware.initLocals);
-
-
-//路由初始化
-routes.init(app);
 
 
 module.exports = app;

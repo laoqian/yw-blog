@@ -1,0 +1,43 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/bootstrap/css/bootstrap.css')
+    //css
+    block css
+  body
+    block header
+      nav.navbar.navbar-inverse.navbar-fixed-top
+        .container
+          .navbar-header
+            button(type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar").navbar-toggle.collapsed
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href="#")= title
+          #navbar.collapse.navbar-collapse
+            ul.nav.navbar-nav
+              //-items=['首页','全部','增加']
+              //for item in items
+               // li(class="active"): a(href="#")= item
+      .yw-menu
+        ul.list-group
+          //-var navs={a:{label:"1" ,key:'123'},b:{label:"1" ,key:'123'}}
+          each nav in navlinks
+            li.list-group-item
+              a(href=nav.href)
+                span(class='glyphicon '+nav.icon) &nbsp
+                span=nav.key
+            
+    
+    #body  
+      block content
+    //footer
+
+    block footer
+    script(src='/jquery/jquery-1.11.2.min.js')
+    //- Customise which Bootstrap javascript files are served by including
+    //- them specifically here, instead of bootstrap-3.3.4.min.js
+    script(src='/bootstrap/js/bootstrap.js')
