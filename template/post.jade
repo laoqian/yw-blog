@@ -9,12 +9,12 @@ block content
           form(role='form', method='post')
             .form-group.form-inline
               label(for="title") 项目名称：
-              input(autofocus type="text" id='title').form-control
+              input(autofocus type="text" name='title').form-control
             .form-group.form-inline
               label 详细介绍：
               textarea(name='content').content-detail
             .form-group.form-inline
-              button.btn.btn-default 上传图片
+              input(type='file' value='上传图片',name='picture')
               label 上传一张不超过4M的图片。
 
             button(type="submit" ).btn.btn-primary.btn-lg 保存

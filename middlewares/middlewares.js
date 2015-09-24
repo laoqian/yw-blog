@@ -8,6 +8,7 @@ exports.initLocals = function(req, res, next) {
 
     var locals = res.locals;
 
+    locals.title='木鱼网络';
     locals.navlinks = [
         { label: '首页',		key: '全部项目',		href: '/'  ,icon:'glyphicon-th'},
         { label: '博客',		key: '增加项目',		href: '/post',icon:'glyphicon-plus' }
