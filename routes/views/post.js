@@ -30,12 +30,10 @@ exports = module.exports = function (req, res) {
             var dst_path ='../data/img/'+picture.originalFilename;
             fs.move(picture.path,dst_path, function (err) {
                 if(err){
-                    console.log("文件上传失败");
+                    res.render('./components/result',{result:"发表失败"});
                     return;
                 }
-                console.log("文件保存成功");
-
-                res.redirect('index');
+                res.render('./components/result',{result:"发表成功"});
             })
 
             data.picture={};
@@ -45,6 +43,8 @@ exports = module.exports = function (req, res) {
             console.log(data);
             return;
         });
+
+        return;
     }
 
     res.render('post', res.app.locals);

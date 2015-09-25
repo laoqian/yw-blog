@@ -30,8 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 //中间件初始化
-var middleware=require('./middlewares/middlewares');
-app.use(middleware.initLocals);
+
+app.use(require('./middlewares/middlewares').initLocals);
 
 
 

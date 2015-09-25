@@ -1,0 +1,23 @@
+//
+   Created by gg on 2015/9/25.
+extends ../layout
+
+block content
+  h2=result
+  span.notice 3秒以后跳转到
+  a(href='./') 首页
+
+
+block js
+    script(type='text/javascript').
+        $(document).ready(function(){
+            var time =3;
+
+            setInterval(function () {
+                time--;
+                $(".notice").text(time + "秒以后跳转到");
+                if (time <= 0) {
+                    window.location.href="./";
+                }
+            },1000);
+        });

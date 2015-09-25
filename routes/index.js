@@ -1,6 +1,4 @@
-
-var multer = require('multer')
-var upload = multer({ dest:'../data/img/'})
+//路由初始化文件
 
 
 
@@ -18,8 +16,9 @@ exports.init = function init (app) {
   // Views
   app.get('/', routes.views.index);
   app.use('/post', routes.views.post);
-
-  console.log('设置路由成功');
+  app.get('/result', function (req, res) {
+    res.render('./components/result',{result:"发表成功"});
+  });
 };
 
 

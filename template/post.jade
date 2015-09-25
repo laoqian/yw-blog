@@ -1,22 +1,21 @@
 extends layout
 
 block content
-  .yw-content
-    .container-fluid
-      .row
-        .col-sm-10
-          label: h2 增加项目
-          form(role='form', method='post',enctype='multipart/form-data')
-            .form-group.form-inline
-              label(for="title") 项目名称：
-              input(autofocus ,type="text", name='title',value='测试项目').form-control.proj-title
-            .form-group.form-inline
-              label 详细介绍：
-              textarea(name='content').content-detail.proj-content
-            .form-group.form-inline
-              input(type='file' value='选择图片',name='picture').img-upload
-              label.img-info 上传一张不超过4M的图片。
-              img.img-wrap
-            button(type='submit').btn.btn-primary.btn-lg 保存
+  .container-fluid
+    .row
+      .col-sm-10
+        label: h2 增加项目
+        form(role='form', method='post',enctype='multipart/form-data').form-submit
+          .form-group.form-inline
+            label(for="title") 项目名称：
+            input(autofocus ,type="text", name='title',value='测试项目').form-control.proj-title
+          .form-group.form-inline
+            label 详细介绍：
+            textarea(name='content').content-detail.proj-content
+          .form-group.form-inline
+            input(type='file' value='选择图片',name='picture').img-upload
+            label.img-info 上传一张不超过4M的图片。
+            img.img-wrap
+          button(type='button').btn.btn-primary.btn-lg.btn-submit 保存
 block append js
   script(src='/javascripts/post.js')

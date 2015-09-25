@@ -58,18 +58,6 @@ $(document).ready(function () {
             return;
         }
 
-
-        $.ajax({
-            cache: false,
-            type: 'post',
-            dataType: 'json',
-            url:window.url,
-            data : data,
-            contentType: false,
-            processData: false,
-            success : function () {
-                alert('success');
-            }
-        });
+        $('.form-submit').submit();
     });
 });
