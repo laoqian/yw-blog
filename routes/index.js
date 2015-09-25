@@ -1,5 +1,5 @@
-//路由初始化文件
 
+//路由初始化文件
 
 
 // Setup Route Bindings

@@ -40,6 +40,7 @@ app.set('importer',require('./controller/lib/importer'));
 
 //初始化本地变量
 app.locals = {hello:'1111'};
+app.locals.table = require('./controller/db');
 
 //路由初始化
 routes.init(app);
