@@ -1,9 +1,3 @@
-
-var multer = require('multer')
-var upload = multer({ dest:'../data/img/'})
-
-
-
 // Setup Route Bindings
 exports.init = function init (app) {
 
