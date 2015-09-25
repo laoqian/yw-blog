@@ -28,6 +28,8 @@ exports = module.exports = function (req, res) {
 
 
             var dst_path ='../data/img/'+picture.originalFilename;
+
+            fs.removeSync(dst_path);
             fs.move(picture.path,dst_path, function (err) {
                 if(err){
                     res.render('./components/result',{result:"发表失败"});
