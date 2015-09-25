@@ -4,12 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var multiparty = require('multiparty');
+
 
 var routes = require('./routes/index');
 
 
 var app = express();
 var router = express.Router();
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'template'));
@@ -30,11 +34,12 @@ var middleware=require('./middlewares/middlewares');
 app.use(middleware.initLocals);
 
 
+
 //应用初始化
 app.set('importer',require('./controller/lib/importer'));
 
 //初始化本地变量
-app.locals = {};
+app.locals = {hello:'1111'};
 
 //路由初始化
 routes.init(app);

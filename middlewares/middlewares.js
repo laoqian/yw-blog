@@ -6,7 +6,7 @@
 //初始化局部变量
 exports.initLocals = function(req, res, next) {
 
-    var locals = res.locals;
+    var locals = res.app.locals;
 
     locals.title='木鱼网络';
     locals.navlinks = [

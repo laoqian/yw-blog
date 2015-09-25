@@ -6,23 +6,17 @@ block content
       .row
         .col-sm-10
           label: h2 增加项目
-          form(role='form', method='post')
+          form(role='form', method='post',enctype='multipart/form-data')
             .form-group.form-inline
               label(for="title") 项目名称：
-              input(autofocus type="text" name='title').form-control
+              input(autofocus ,type="text", name='title',value='测试项目').form-control.proj-title
             .form-group.form-inline
               label 详细介绍：
-              textarea(name='content').content-detail
+              textarea(name='content').content-detail.proj-content
             .form-group.form-inline
-              input(type='file' value='上传图片',name='picture')
-              label 上传一张不超过4M的图片。
-
-            button(type="submit" ).btn.btn-primary.btn-lg 保存
-
-          //
-            p 客户名称
-              input(type='text',name='name')
-            p 客户电话
-              input(type='text',name='tel')
-            p
-              input(type='submit' value='提交')
+              input(type='file' value='选择图片',name='picture').img-upload
+              label.img-info 上传一张不超过4M的图片。
+              img.img-wrap
+            button(type='submit').btn.btn-primary.btn-lg 保存
+block append js
+  script(src='/javascripts/post.js')
