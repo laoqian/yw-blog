@@ -68,5 +68,3 @@ exports = module.exports = function (req, res) {
 
     res.render('post', res.app.locals);
 };
-
-

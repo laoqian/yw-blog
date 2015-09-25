@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var debug = require('debug')('db');
 
 // database config information
 // 有用户和密码时，验证通不过
@@ -18,7 +19,6 @@ function getUri(cfg) {
         if (typeof cfg.pass === 'undefined') {
             cfg.pass = '';
         }
-        console.log();
         uri += cfg.user + ':' + cfg.pass + '@';
     }
     if (typeof cfg.addr === 'undefined') {
@@ -36,20 +36,20 @@ function getUri(cfg) {
 }
 
 var uri = getUri(cfg);
-console.log("database url: [" + uri + "]" );
+debug("database url: [" + uri + "]" );
 
 // connect database
 var db = mongoose.createConnection(uri);
 
 // listen event: 'error' 'open'
 db.on('error', function(err) {
-    console.log('mongoose error: ' + err);
+    debug('mongoose error: ' + err);
 });
 db.once('open', function(err) {
     if (err) {
-        console.log("open database failed, ERR: " + err);
+        debug("open database failed, ERR: " + err);
     } else {
-        console.log("open database success.");
+        debug("open database success.");
     }
 });
 
@@ -65,7 +65,7 @@ var Schema_blog = new mongoose.Schema({
     data  :  {
         title: String,
         content: String,
-        picture : {
+        picture : {// 可以考虑修改为 pictures，以数组存储
                 name: String,
                 path: String
             }
@@ -82,9 +82,6 @@ models['blog'] = db.model('blog', Schema_blog, 'blog');
 
 // get the related model
 module.exports = function getRelModel(collection) {
-    //var model = models[collection];
-    //return model;
-
     return models[collection];
 };
 
@@ -93,9 +90,9 @@ module.exports = function getRelModel(collection) {
 //// method one
 //models['blog'].create({data: {title: 'test1', content: 'content1'}}, function(e) {
 //    if (e) {
-//        console.log("ERROR: [" + e + "]");
+//        debug("ERROR: [" + e + "]");
 //    } else {
-//        console.log('Doc insert  success.');
+//        debug('Doc insert  success.');
 //    }
 //});
 
@@ -103,10 +100,8 @@ module.exports = function getRelModel(collection) {
 //var doc = new models['blog']({data: {title: 'test2', content: 'content2'}});
 //doc.save(function(err) {
 //    if (err) {
-//        console.log('ERROR: ' + err);
+//        debug('ERROR: ' + err);
 //    } else {
-//        console.log('Doc insert success.');
+//        debug('Doc insert success.');
 //    }
 //});
-
-//// test find
