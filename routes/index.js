@@ -16,9 +16,6 @@ exports.init = function init (app) {
   // Views
   app.get('/', routes.views.index);
   app.use('/post', routes.views.post);
-  app.get('/result', function (req, res) {
-    res.render('./components/result',{result:"发表成功"});
-  });
 };
 
 

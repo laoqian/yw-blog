@@ -14,6 +14,5 @@ exports.initLocals = function(req, res, next) {
         { label: '博客',		key: '增加项目',		href: '/post',icon:'glyphicon-plus' }
     ];
 
-    console.log('initLocals');
     next();
 };

@@ -27,12 +27,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+app.use(express.static(path.join(__dirname, 'data')));
 
 //中间件初始化
-
 app.use(require('./middlewares/middlewares').initLocals);
-
 
 
 //应用初始化
