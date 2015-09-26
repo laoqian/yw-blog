@@ -1,58 +1,63 @@
 /**
  * Created by gg on 2015/9/23.
  */
+var url = require('url');
+
 var debug = require('debug')('app:index');
-var find_args = {
-    field: 'data.title date',
-    limit: 5,
-    skip : 0,
-    sort : {date:-1}
-};
-var page_args = {
-    current: 1,
-    total: 0
+var findArgs = {
+  searchField : 'data.title date',
+  itemPerPage : 5,
+  sortArgs    : {date:-1}
 };
 
 
 exports = module.exports = function  (req, res) {
-    var locals=res.app.locals;
-    var model_blog = locals.table('blog');
-    locals.pages = {};
-    locals.blogs = [];
+  var myLocals  = res.app.locals;
+  var modelBlog = myLocals.table('blog');
 
+  var locals = res.locals;
+  locals.pages = {};
+  locals.blogs = [];
 
-    if (req.method.toLocaleLowerCase() === 'get') {
-        model_blog.count(updatePage);
-    } else {
-        model_blog.find({}, find_args.field, getData).sort(find_args.sort).skip(find_args.skip).limit(find_args.limit);
+  modelBlog.count(updatePageCount);
+  function updatePageCount(err, count) {
+    if (err) {
+      debug(err);
+      res.render('index', locals);
+      return;
     }
 
+    // get the total page
+    locals.pages.tol = count / findArgs.itemPerPage + (0 == count % findArgs.itemPerPage ? 0 : 1);
 
-    function updatePage(err, count) {
-        if (err) {
-            debug(err);
-            res.render('index', locals);
-            return;
-        }
+    // revise the page number, and it is also the current page number
+    var urlParse = url.parse(req.url).query;
+    var pNum = urlParse.p;
+    if (typeof pNum != 'number' || pNum <= 0) {
+      pNum = 1;
+    }
+    if (pNum > locals.pages.tol) {
+      pNum = locals.pages.tol;
+    }
+    locals.pages.cur = pNum;
 
-        locals.pages.total = count / find_args.limit + (0 == count % find_args.limit ? 0 : 1);
-        model_blog.find({}, find_args.field, getData).sort(find_args.sort).skip(find_args.skip).limit(find_args.limit);
+    modelBlog.find({}, findArgs.searchField, getData)
+      .sort(findArgs.sortArgs)
+      .skip((pNum-1) * findArgs.itemPerPage)
+      .limit(findArgs.itemPerPage);
+  }
+
+  function getData(err, data){
+    if (err) {
+      debug(err);
+      res.render('index', locals);
+      return;
     }
 
-    function getData(err, data){
-        if (err) {
-            debug(err);
-            res.render('index', locals);
-            return;
-        }
-
-        for (i in data) {
-            locals.blogs.push({index: find_args.skip++, title: data[i].data.title, date: data[i].date});
-        }
-
-        page_args.current = find_args.skip / find_args.limit + (0 == find_args.skip % find_args.limit ? 0 : 1);
-        locals.pages.current = page_args.current;
-        res.render('index', locals);
+    for (i in data) {
+      locals.blogs.push({index: findArgs.skip++, title: data[i].data.title, date: data[i].date});
     }
 
+    res.render('index', locals);
+  }
 };

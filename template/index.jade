@@ -23,10 +23,10 @@ block content
             td 草稿
             td 于其怪
             td=blogs[i].date
-      span 当前#{pages.current}/#{pages.total}页,跳转&nbsp
-        button.btn.btn-default < 上一页
+      span 当前#{pages.cur}/#{pages.tol}页,跳转&nbsp
+        a(href="/?p=" + (pages.cur - 1)) < 上一页
         span &nbsp &nbsp
-        button.btn.btn-default 下一页 >
+        a(href="/?p=" + (pages.cur + 1)) 下一页 >
 
 
 
