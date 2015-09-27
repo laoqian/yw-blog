@@ -1,3 +1,8 @@
+
+//oneapm 测试
+
+
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -26,18 +31,27 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.static(path.join(__dirname, 'data')));
 
 //中间件初始化
 app.use(require('./middlewares/middlewares').initLocals);
 
+var lessMiddleware = require("less-middleware");
+
+app.use(lessMiddleware(__dirname + "/public",{
+  dest: __dirname + "/public",
+  render:{
+    compress:true
+  }
+}));
+
 
 //应用初始化
 app.set('importer',require('./controller/lib/importer'));
 
+
 //初始化本地变量
-app.locals = {hello:'1111'};
+
 app.locals.table = require('./controller/db');
 
 //路由初始化

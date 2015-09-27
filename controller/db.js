@@ -6,7 +6,7 @@ var debug = require('debug')('db');
 var cfg = {
   //user  : 'root',
   //pass  : '123456',
-  addr    : '127.0.0.1',
+  addr    : '192.168.0.100',
   port    : 27017,
   database: 'my_database'
 };
