@@ -5,9 +5,6 @@
 
 var multiparty = require('multiparty');
 var fs=require("fs-extra");
-var path =require('path');
-
-
 
 exports = module.exports = function (req, res) {
   if (req.method.toUpperCase() === "POST") {

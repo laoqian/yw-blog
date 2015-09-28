@@ -30,21 +30,24 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'data')));
+
 
 //中间件初始化
 app.use(require('./middlewares/middlewares').initLocals);
 
+// declaring less-middleware before static middleware to make sure
+// less recompiles with {force: true}
 var lessMiddleware = require("less-middleware");
-
 app.use(lessMiddleware(__dirname + "/public",{
   dest: __dirname + "/public",
+  force: true,
   render:{
     compress:true
   }
 }));
 
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'data')));
 
 //应用初始化
 app.set('importer',require('./controller/lib/importer'));

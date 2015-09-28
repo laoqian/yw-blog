@@ -16,5 +16,6 @@ exports.init = function init (app) {
   // Views
   app.get('/', routes.views.index);
   app.use('/post', routes.views.post);
+  app.use('/login', routes.views.login);
 
 };

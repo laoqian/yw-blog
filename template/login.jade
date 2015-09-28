@@ -1,0 +1,70 @@
+
+html
+  head
+    link(rel='stylesheet', href='/styles/site.min.css')
+
+  body
+    div.login-box-out
+      div.login-box-in(color="red")
+        form(method='post')
+          p &nbsp
+          p
+            p.login 登录
+            p &nbsp
+          p
+            span User: &nbsp
+            input.login(autofocus ,type="text", name='user',value='admin')
+          p
+            span Pass: &nbsp
+            input.login(autofocus, type='password' name='pass',value='123456')
+            p
+              label.blank
+          p
+            button.login(type='submit') Login
+
+          p &nbsp
+
+
+    style.
+      .login-box-out {
+        margin-top: 50%;
+        margin-bottom: 50%;
+        margin-left: 50%;
+        margin-right: 50%;
+      }
+
+      .login-box-in {
+        margin-top: -300px;
+        margin-bottom: -300px;
+        margin-left: -250px;
+        margin-right: -250px;
+        background-color: lightslategrey;
+        font-size: 25px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      input.login {
+        border-radius: 3px;
+        type: text;
+      }
+
+      p.login {
+        color: white;
+        font-size: 35px;
+      }
+
+      p.blank {
+        height: 1px;
+        font-size: 5px;
+      }
+
+      label.blank {
+        height: 1px;
+      }
+
+      button.login {
+        background-color: lightcoral;
+        font-size: 20px;
+        border-radius: 3px;
+      }

@@ -2,9 +2,11 @@
  * Created by gg on 2015/9/23.
  */
 var url = require('url');
-
-
 var debug = require('debug')('app:index');
+
+var myLog = console.log;
+
+
 var findArgs = {
   searchField : 'data.title date',
   itemPerPage : 5,
@@ -16,6 +18,21 @@ exports = module.exports = function  (req, res) {
   var myLocals  = res.app.locals;
   var modelBlog = myLocals.table('blog');
 
+  if (typeof modelBlog === 'undefined') {
+    myLog('Get database model failed.');
+
+    var error = myLocals.table('db err');
+    error = error || '';
+    res.render('error', {
+      message: 'Database Error',
+      error: {
+        status: 'Get database model failed.',
+        stack: error
+      }
+    });
+    return;
+  }
+
   var locals = res.locals;
   locals.pages = {};
   locals.blogs = [];
@@ -23,7 +40,7 @@ exports = module.exports = function  (req, res) {
   modelBlog.count(updatePageCount);
   function updatePageCount(err, count) {
     if (err) {
-      debug(err);
+      myLog(err);
       res.render('index', locals);
       return;
     }
